@@ -1,0 +1,245 @@
+/* Atelier.css v5.0 - Styles pour Folioscope (Créé par DEDE) */
+:root {
+    --bg-dark: #2E2E2E;
+    --bg-med: #3C3C3C;
+    --bg-light: #4A4A4A;
+    --bg-deep: #1E1E1E;
+    --text-light: #EAEAEA;
+    --border-color: #5A5A5A;
+    --accent-blue: #39A0FF;
+    --accent-blue-dark: #243247;
+    --accent-yellow: #DB9C2B;
+    --accent-green: #1C8F4E;
+    --accent-red: #A51D2D;
+}
+
+html, body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 10px;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+/* Toolbars */
+.toolbar {
+    background-color: var(--bg-deep);
+    padding: 8px 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}
+
+.toolbar-section {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.toolbar-section:not(:last-child) {
+    border-right: 1px solid var(--border-color);
+}
+
+.toolbar label {
+    font-weight: 500;
+}
+
+.toolbar input[type="number"] {
+    width: 60px;
+    background-color: var(--bg-med);
+    color: white;
+    border: 1px solid var(--border-color);
+}
+
+/* Styles des boutons */
+.tool-button, .action-button, .option-button {
+    border: 2px solid var(--bg-light);
+    background-color: var(--bg-light);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.1s, border-color 0.1s;
+}
+
+.tool-button {
+    font-size: 1.2em;
+}
+
+.tool-button.active, .option-button.active {
+    border-color: var(--accent-blue);
+    background-color: var(--accent-blue-dark);
+}
+
+.action-button:hover:not(:disabled) {
+    filter: brightness(1.2);
+}
+
+#exportButton { background-color: var(--accent-green); }
+#newProjectButton { background-color: var(--accent-yellow); }
+#playButton.playing { background-color: var(--accent-red); }
+#exportVideoButton { background-color: var(--accent-blue); }
+
+/* AJOUT DE STYLE POUR LES NOUVEAUX BOUTONS */
+#saveProjectButton { background-color: var(--accent-green); }
+#loadProjectButton { background-color: var(--accent-blue); }
+
+
+/* Désactivation des boutons */
+:disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+}
+
+/* Layout (Canvas + Panneaux latéraux) */
+.main-content {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1; /* Prend tout l'espace vertical restant */
+    min-height: 0; /* Important pour le flexbox */
+}
+
+.side-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 0 0 220px; /* Panneau latéral à 220px */
+    background-color: var(--bg-deep);
+    padding: 10px;
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+.canvas-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 0; /* Important */
+}
+
+#drawingCanvas {
+    background-color: var(--bg-med);
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    max-width: 100%;
+    max-height: 100%; /* S'adapte au conteneur */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* Panneau de Calques */
+.layer-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: var(--bg-med);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.layer-item {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+}
+
+.layer-item:last-child {
+    border-bottom: none;
+}
+
+.layer-item.active {
+    background-color: var(--accent-blue-dark);
+    border-left: 4px solid var(--accent-blue);
+    font-weight: bold;
+}
+
+.layer-item:hover:not(.active) {
+    background-color: var(--bg-light);
+}
+
+/* Timeline (Bas) */
+#timelineContainer {
+    width: 100%;
+    background-color: var(--bg-deep);
+    border-top: 2px solid var(--border-color);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px 8px 0 0;
+    box-sizing: border-box;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-shrink: 0;
+    height: 125px; /* Hauteur fixe */
+}
+
+.timeline-frame {
+    display: inline-block;
+    border: 3px solid var(--border-color);
+    border-radius: 4px;
+    margin: 0 5px;
+    padding: 5px;
+    background-color: var(--bg-dark);
+    cursor: pointer;
+    position: relative;
+}
+
+.timeline-frame.active {
+    border-color: var(--accent-blue);
+    background-color: var(--accent-blue-dark);
+}
+
+.timeline-frame canvas {
+    display: block;
+    background-color: var(--bg-med);
+}
+
+.timeline-frame span {
+    display: block;
+    text-align: center;
+    font-size: 0.8em;
+    margin-top: 4px;
+}
+
+.delete-frame-btn {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 18px;
+}
+
+#addFrameButtonTimeline {
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 5px;
+    padding-top: 5px;
+    font-size: 3em;
+    text-align: center;
+}

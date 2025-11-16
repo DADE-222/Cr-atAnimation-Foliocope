@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folioscope v5.0 - Créateur d'Animation</title>
+    
+    <link rel="stylesheet" href="Atelier.css">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <div id="projectToolbar" class="toolbar">
+            <div class="toolbar-section">
+                <label>Projet:</label>
+                <label for="canvasWidth">L:</label>
+                <input type="number" id="canvasWidth" value="800" min="100">
+                <label for="canvasHeight">H:</label>
+                <input type="number" id="canvasHeight" value="600" min="100">
+                <button id="newProjectButton" class="action-button">Nouveau Projet</button>
+            </div>
+            
+            <div class="toolbar-section">
+                <label>Fichier:</label>
+                <button id="saveProjectButton" class="action-button" title="Sauvegarder le projet">💾 Enregistrer</button>
+                <button id="loadProjectButton" class="action-button" title="Ouvrir un projet">📂 Ouvrir</button>
+            </div>
+            <div class="toolbar-section">
+                <label>Histoire:</label>
+                <button id="undoButton" class="action-button" title="Annuler (Ctrl+Z)">↩️</button>
+                <button id="redoButton" class="action-button" title="Rétablir (Ctrl+Y)">↪️</button>
+            </div>
+            <div class="toolbar-section">
+                <button id="playButton" class="action-button" title="Lire l'animation">▶️ Play</button>
+            </div>
+            <div class="toolbar-section">
+                <input type="checkbox" id="onionSkinCheckbox" checked>
+                <label for="onionSkinCheckbox">🧅 Fantôme</label>
+            </div>
+            <div class="toolbar-section">
+                <label for="fpsSlider">Vitesse:</label>
+                <input type="range" id="fpsSlider" min="1" max="60" value="12">
+                <span id="fpsValue">12</span> FPS
+            </div>
+            <div class="toolbar-section">
+                <button id="exportButton" class="action-button">⬇️ Exporter GIF</button>
+                <span id="exportStatus" style="margin-left: 10px; color: var(--accent-yellow);"></span>
+                
+                <button id="exportVideoButton" class="action-button">⬇️ Exporter Vidéo</button>
+                <span id="exportVideoStatus" style="margin-left: 10px; color: var(--accent-blue);"></span>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            
+            <div class="side-panel" id="left-panel">
+                <h3>✏️ Outils</h3>
+                <div class="toolbar-section">
+                    <button id="penButton" class="tool-button active" title="Stylo">✏️</button>
+                    <button id="eraserButton" class="tool-button" title="Gomme">🧼</button>
+                    <button id="fillButton" class="tool-button" title="Pot de peinture">🪣</button>
+                </div>
+                
+                <h3>Couleur</h3>
+                <div class="toolbar-section">
+                    <label for="colorPicker">Couleur:</label>
+                    <input type="color" id="colorPicker" value="#FFFFFF" title="Couleur du stylo">
+                </div>
+
+                <h3>Taille</h3>
+                <div class="toolbar-section">
+                    <label for="penSize">Taille:</label>
+                    <input type="range" id="penSize" min="1" max="200" value="5">
+                    <span id="penSizeValue">5</span>px
+                </div>
+
+                <h3>Options Crayon</h3>
+                <div class="toolbar-section">
+                    <button id="penTypeRound" class="option-button active" data-type="round">Ronde</button>
+                    <button id="penTypeSquare" class="option-button" data-type="square">Carrée</button>
+                </div>
+            </div>
+
+            <div class="canvas-container">
+                <canvas id="drawingCanvas"></canvas>
+            </div>
+
+            <div class="side-panel" id="right-panel">
+                <h3>📋 Calques (Frame Actuelle)</h3>
+                <div class="toolbar-section" style="padding: 0;">
+                    <button id="addLayerButton" class="action-button" title="Ajouter un calque">➕ Nouveau</button>
+                    <button id="dupeLayerButton" class="action-button" title="Dupliquer le calque actif">©️ Dupliquer</button>
+                </div>
+                <ul id="layerList" class="layer-list">
+                    </ul>
+            </div>
+
+        </div>
+
+        <div id="timelineContainer">
+            <button id="addFrameButtonTimeline" class="action-button" title="Ajouter une nouvelle frame">+</button>
+        </div>
+
+    </div>
+    
+    <script src="Moteur.js"></script>
+
+</body>
+</html>
